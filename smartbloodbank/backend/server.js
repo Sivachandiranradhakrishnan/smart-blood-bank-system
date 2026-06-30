@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-
+console.log("MONGO_URI =", process.env.MONGO_URI);
 const authRoutes = require("./routes/authRoutes");
 const donorRoutes = require("./routes/donorRoutes");
 const requestRoutes = require("./routes/requestRoutes");
@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect("mongodb://127.0.0.1:27017/smartbloodbank")
+mongoose.connect(process.env.MONGO_URI)
   .then(async () => {
     console.log("✅ MongoDB Connected");
     await createAdminAccount();
@@ -26,9 +26,12 @@ mongoose.connect("mongodb://127.0.0.1:27017/smartbloodbank")
 async function createAdminAccount() {
   const User = require("./models/User");
   const bcrypt = require("bcryptjs");
+
   const existing = await User.findOne({ username: "admin" });
+
   if (!existing) {
     const hashed = await bcrypt.hash("123456789", 10);
+
     await User.create({
       username: "admin",
       password: hashed,
@@ -41,6 +44,7 @@ async function createAdminAccount() {
       weight: 70,
       isAdmin: true
     });
+
     console.log("✅ Admin account created");
   }
 }
@@ -53,6 +57,7 @@ app.use("/api/events", eventRoutes);
 app.use("/api/notifications", notificationRoutes);
 
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
