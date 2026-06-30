@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta name="description" content="Smart Blood Bank — connect donors with recipients, manage blood stock, and save lives."/>
+  <title>Smart Blood Bank</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body data-theme="dark">
+
+  <!-- Birthday Popup -->
+  <div id="birthdayPopup" class="birthday-popup hidden" role="dialog" aria-labelledby="birthdayTitle">
+    <div class="birthday-inner">
+      <div class="birthday-emojis" aria-hidden="true">🎂 🎉 🎈</div>
+      <h2 id="birthdayTitle">Happy Birthday!</h2>
+      <p id="birthdayMsg"></p>
+      <button class="btn-primary" onclick="closeBirthday()">Thank You</button>
+    </div>
+  </div>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark theme" aria-label="Toggle theme">🌗</button>
+
+  <!-- ===================== LOGIN PAGE ===================== -->
+  <div id="loginPage" class="page active">
+    <div class="auth-container">
+      <aside class="auth-left">
+        <div class="auth-brand">
+          <span class="brand-drop" aria-hidden="true">🩸</span>
+          <h1>Smart<br/>Blood<br/>Bank</h1>
+          <p>Saving lives through technology</p>
+        </div>
+        <div class="auth-stats">
+          <div class="astat">
+            <span id="statDonors">0</span>
+            <small>Registered Donors</small>
+          </div>
+          <div class="astat">
+            <span id="statUnits">0</span>
+            <small>Units Available</small>
+          </div>
+        </div>
+      </aside>
+
+      <main class="auth-right">
+        <div class="auth-tabs" role="tablist">
+          <button class="atab active" role="tab" onclick="switchAuthTab('login')">Login</button>
+          <button class="atab" role="tab" onclick="switchAuthTab('register')">Register</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form" onsubmit="event.preventDefault(); login();">
+          <div class="field">
+            <label for="loginUser">Username</label>
+            <input type="text" id="loginUser" placeholder="Enter username" autocomplete="username"/>
+          </div>
+          <div class="field">
+            <label for="loginPass">Password</label>
+            <input type="password" id="loginPass" placeholder="Enter password" autocomplete="current-password"/>
+          </div>
+          <button type="submit" class="btn-primary full">Login</button>
+          <div id="loginMsg" class="form-msg" role="status"></div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" class="auth-form hidden" onsubmit="event.preventDefault(); register();">
+          <div class="form-grid2">
+            <div class="field">
+              <label for="regName">Full Name</label>
+              <input type="text" id="regName" placeholder="Your full name"/>
+            </div>
+            <div class="field">
+              <label for="regUser">Username</label>
+              <input type="text" id="regUser" placeholder="Choose username" autocomplete="username"/>
+            </div>
+            <div class="field">
+              <label for="regDob">Date of Birth</label>
+              <input type="date" id="regDob" onchange="checkAge()"/>
+            </div>
+            <div class="field">
+              <label for="regBlood">Blood Group</label>
+              <select id="regBlood">
+                <option value="">Select blood group</option>
+                <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="regPhone">Phone</label>
+              <input type="tel" id="regPhone" placeholder="10 digit number"/>
+            </div>
+            <div class="field">
+              <label for="regCity">City</label>
+              <input type="text" id="regCity" placeholder="Your city"/>
+            </div>
+            <div class="field">
+              <label for="regWeight">Weight (kg)</label>
+              <input type="number" id="regWeight" placeholder="e.g. 65" min="40"/>
+            </div>
+            <div class="field">
+              <label for="regPass">Password</label>
+              <input type="password" id="regPass" placeholder="Choose password" autocomplete="new-password"/>
+            </div>
+          </div>
+
+          <div id="ageRoleDisplay" class="role-display hidden"></div>
+
+          <div id="otpSection" class="otp-section hidden">
+            <div class="field">
+              <label for="otpInput">Verification Code</label>
+              <input type="text" id="otpInput" placeholder="Enter 6-digit OTP" maxlength="6" inputmode="numeric"/>
+            </div>
+          </div>
+
+          <div class="auth-actions">
+            <button type="button" class="btn-secondary full" onclick="sendOTP()">Send OTP</button>
+            <button type="submit" class="btn-primary full">Create Account</button>
+          </div>
+          <div id="registerMsg" class="form-msg" role="status"></div>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <!-- ===================== ADMIN PANEL ===================== -->
+  <div id="adminPage" class="page">
+    <div class="app-layout">
+      <aside class="sidebar" id="adminSidebar">
+        <div class="sidebar-brand">🩸 BloodBank<span>Admin</span></div>
+        <nav>
+          <button class="slink active" onclick="adminSection('dashboard')">Dashboard</button>
+          <button class="slink" onclick="adminSection('users')">Manage Users</button>
+          <button class="slink" onclick="adminSection('donations')">Donations</button>
+          <button class="slink" onclick="adminSection('requests')">Blood Requests</button>
+          <button class="slink" onclick="adminSection('stock')">Blood Stock</button>
+          <button class="slink" onclick="adminSection('events')">Events</button>
+          <button class="slink" onclick="adminSection('analytics')">Analytics</button>
+        </nav>
+        <button class="sidebar-logout" onclick="logout()">Logout</button>
+      </aside>
+
+      <main class="main-area">
+        <header class="topbar">
+          <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+          <h1 class="topbar-title" id="adminPageTitle">Dashboard</h1>
+          <div class="topbar-right">
+            <button class="notif-btn" onclick="openNotifications()" aria-label="Notifications">
+              🔔 <span id="adminNotifBadge" class="notif-badge hidden"></span>
+            </button>
+            <span class="topbar-user">Admin</span>
+          </div>
+        </header>
+
+        <section id="sec-dashboard" class="asec active">
+          <div class="stat-grid">
+            <div class="stat-card s1"><div class="snum" id="adTotalDonors">0</div><div class="slabel">Total Donors</div></div>
+            <div class="stat-card s2"><div class="snum" id="adTotalRequests">0</div><div class="slabel">Blood Requests</div></div>
+            <div class="stat-card s3"><div class="snum" id="adPendingReq">0</div><div class="slabel">Pending Requests</div></div>
+            <div class="stat-card s4"><div class="snum" id="adLivesSaved">0</div><div class="slabel">Lives Saved</div></div>
+          </div>
+          <div class="dash-row">
+            <div class="dash-card">
+              <h3>Blood Stock Levels</h3>
+              <div id="adminStockBars" class="stock-bars"></div>
+            </div>
+            <div class="dash-card">
+              <h3>Donor of the Month</h3>
+              <div id="donorOfMonth" class="donor-month"></div>
+            </div>
+          </div>
+          <div class="dash-card full-width">
+            <h3>Recent Blood Requests</h3>
+            <div id="recentRequests"></div>
+          </div>
+        </section>
+
+        <section id="sec-users" class="asec">
+          <div class="sec-header">
+            <h2>Manage Users</h2>
+            <input type="search" placeholder="Search by name, blood group, city..." id="userSearch" oninput="filterUsers()" class="search-input"/>
+          </div>
+          <div id="userTable" class="data-table"></div>
+        </section>
+
+        <section id="sec-donations" class="asec">
+          <h2>All Donations</h2>
+          <div id="donationTable" class="data-table"></div>
+        </section>
+
+        <section id="sec-requests" class="asec">
+          <h2>Blood Requests</h2>
+          <div id="requestTable"></div>
+        </section>
+
+        <section id="sec-stock" class="asec">
+          <h2>Blood Stock</h2>
+          <div id="adminStockGrid" class="stock-grid"></div>
+        </section>
+
+        <section id="sec-events" class="asec">
+          <div class="sec-header">
+            <h2>Blood Drive Events</h2>
+            <button class="btn-primary" onclick="openEventModal()">Create Event</button>
+          </div>
+          <div id="adminEventsList"></div>
+        </section>
+
+        <section id="sec-analytics" class="asec">
+          <h2>Analytics</h2>
+          <div class="analytics-grid">
+            <div class="dash-card"><h3>Most Requested Blood Group</h3><div id="mostRequested" class="ana-val"></div></div>
+            <div class="dash-card"><h3>Top Donor City</h3><div id="topCity" class="ana-val"></div></div>
+            <div class="dash-card"><h3>Donations This Month</h3><div id="monthDonations" class="ana-val"></div></div>
+            <div class="dash-card"><h3>Total Lives Saved</h3><div id="totalLivesSaved" class="ana-val"></div></div>
+          </div>
+          <div class="dash-card full-width">
+            <h3>Blood Group Distribution</h3>
+            <div id="bgDistribution" class="bg-dist"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- ===================== USER PANEL ===================== -->
+  <div id="userPage" class="page">
+    <div class="app-layout">
+      <aside class="sidebar" id="userSidebar">
+        <div class="sidebar-brand">🩸 BloodBank</div>
+        <nav>
+          <button class="slink active" onclick="userSection('home')">Home</button>
+          <button class="slink" onclick="userSection('donate')">Donate Blood</button>
+          <button class="slink" onclick="userSection('request')">Request Blood</button>
+          <button class="slink" onclick="userSection('search')">Search Donors</button>
+          <button class="slink" onclick="userSection('myrequests')">My Requests</button>
+          <button class="slink" onclick="userSection('history')">My Donations</button>
+          <button class="slink" onclick="userSection('profile')">My Profile</button>
+          <button class="slink" onclick="userSection('compatibility')">Compatibility</button>
+          <button class="slink" onclick="userSection('events')">Events</button>
+          <button class="slink" onclick="userSection('faq')">FAQ</button>
+        </nav>
+        <button class="sidebar-logout" onclick="logout()">Logout</button>
+      </aside>
+
+      <main class="main-area">
+        <header class="topbar">
+          <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+          <h1 class="topbar-title" id="userPageTitle">Home</h1>
+          <div class="topbar-right">
+            <button class="notif-btn" onclick="openNotifications()" aria-label="Notifications">
+              🔔 <span id="userNotifBadge" class="notif-badge hidden"></span>
+            </button>
+            <span class="topbar-user" id="userGreeting">User</span>
+          </div>
+        </header>
+
+        <section id="usec-home" class="usec active">
+          <div class="user-hero">
+            <h2 id="heroTitle">Welcome back!</h2>
+            <p id="heroSub">Your blood can save lives today.</p>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-card s1"><div class="snum" id="uDonationCount">0</div><div class="slabel">My Donations</div></div>
+            <div class="stat-card s2"><div class="snum" id="uPoints">0</div><div class="slabel">Reward Points</div></div>
+            <div class="stat-card s3"><div class="snum" id="uStreak">0</div><div class="slabel">Donation Streak</div></div>
+            <div class="stat-card s4"><div class="snum" id="uDaysLeft">—</div><div class="slabel">Days to Next Donation</div></div>
+          </div>
+          <div class="dash-row">
+            <div class="dash-card">
+              <h3>My Badges</h3>
+              <div id="myBadges" class="badges-grid"></div>
+            </div>
+            <div class="dash-card">
+              <h3>Matching Blood Requests</h3>
+              <div id="matchingRequests"></div>
+            </div>
+          </div>
+          <div class="sos-section">
+            <button class="sos-btn" onclick="triggerSOS()">
+              Emergency SOS
+              <span>One-click urgent blood request</span>
+            </button>
+          </div>
+        </section>
+
+        <section id="usec-donate" class="usec">
+          <h2>Donate Blood</h2>
+          <div id="donateContent"></div>
+        </section>
+
+        <section id="usec-request" class="usec">
+          <h2>Request Blood</h2>
+          <div class="form-card">
+            <div class="form-grid2">
+              <div class="field">
+                <label for="reqBlood">Blood Group Needed</label>
+                <select id="reqBlood">
+                  <option value="">Select</option>
+                  <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                  <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="reqCity">Your City</label>
+                <input type="text" id="reqCity" placeholder="City"/>
+              </div>
+              <div class="field">
+                <label for="reqReason">Reason</label>
+                <input type="text" id="reqReason" placeholder="e.g. Surgery, Accident"/>
+              </div>
+              <div class="field">
+                <label for="reqUrgency">Urgency</label>
+                <select id="reqUrgency">
+                  <option value="normal">Normal</option>
+                  <option value="urgent">Urgent</option>
+                  <option value="emergency">Emergency</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="reqMsg">Message (optional)</label>
+                <input type="text" id="reqMsg" placeholder="Any additional info..."/>
+              </div>
+            </div>
+            <button class="btn-primary" onclick="submitRequest()">Send Request</button>
+            <div id="reqMsg2" class="form-msg" role="status"></div>
+          </div>
+        </section>
+
+        <section id="usec-search" class="usec">
+          <h2>Search Donors</h2>
+          <div class="search-bar-row">
+            <select id="searchBG" aria-label="Blood group filter">
+              <option value="">All Blood Groups</option>
+              <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+            </select>
+            <input type="text" id="searchCity" placeholder="City / Location"/>
+            <button class="btn-primary" onclick="searchDonors()">Search</button>
+          </div>
+          <div id="searchResults" class="donor-grid"></div>
+        </section>
+
+        <section id="usec-myrequests" class="usec">
+          <h2>My Blood Requests</h2>
+          <div id="myRequestsList"></div>
+        </section>
+
+        <section id="usec-history" class="usec">
+          <h2>My Donation History</h2>
+          <div id="myDonationHistory"></div>
+        </section>
+
+        <section id="usec-profile" class="usec">
+          <h2>My Profile</h2>
+          <div id="profileContent"></div>
+        </section>
+
+        <section id="usec-compatibility" class="usec">
+          <h2>Blood Compatibility Checker</h2>
+          <div class="form-card compact">
+            <div class="field">
+              <label for="compatBG">Select Blood Group</label>
+              <select id="compatBG" onchange="checkCompatibility()">
+                <option value="">Select your blood group</option>
+                <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+              </select>
+            </div>
+          </div>
+          <div id="compatResult"></div>
+          <div class="compat-info-grid" id="bgInfoGrid"></div>
+        </section>
+
+        <section id="usec-events" class="usec">
+          <h2>Blood Drive Events</h2>
+          <div id="userEventsList"></div>
+        </section>
+
+        <section id="usec-faq" class="usec">
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-list" id="faqList"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Notifications Panel -->
+  <div id="notifPanel" class="notif-panel hidden" role="dialog" aria-label="Notifications">
+    <div class="notif-header">
+      <h3>Notifications</h3>
+      <div class="notif-header-actions">
+        <button onclick="markAllRead()" class="btn-sm">Mark All Read</button>
+        <button onclick="closeNotifications()" class="btn-sm btn-icon" aria-label="Close">✕</button>
+      </div>
+    </div>
+    <div id="notifList" class="notif-list"></div>
+  </div>
+  <div id="notifOverlay" class="notif-overlay hidden" onclick="closeNotifications()"></div>
+
+  <!-- Event Modal -->
+  <div id="eventModal" class="modal-overlay hidden" role="dialog" aria-labelledby="eventModalTitle">
+    <div class="modal">
+      <h3 id="eventModalTitle">Create Blood Drive Event</h3>
+      <div class="field"><label for="evTitle">Event Title</label><input type="text" id="evTitle" placeholder="e.g. Blood Donation Camp"/></div>
+      <div class="field"><label for="evDate">Date</label><input type="date" id="evDate"/></div>
+      <div class="field"><label for="evLocation">Location</label><input type="text" id="evLocation" placeholder="Full address"/></div>
+      <div class="field"><label for="evCity">City</label><input type="text" id="evCity" placeholder="City"/></div>
+      <div class="field"><label for="evSlots">Total Slots</label><input type="number" id="evSlots" value="50" min="1"/></div>
+      <div class="field"><label for="evDesc">Description</label><input type="text" id="evDesc" placeholder="Brief description"/></div>
+      <div class="modal-btns">
+        <button class="btn-primary" onclick="createEvent()">Create Event</button>
+        <button class="btn-cancel" onclick="closeEventModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certificate Modal -->
+  <div id="certModal" class="modal-overlay hidden" role="dialog" aria-label="Donation certificate">
+    <div class="modal cert-modal">
+      <div class="certificate" id="certContent"></div>
+      <div class="modal-btns">
+        <button class="btn-primary" onclick="printCert()">Print</button>
+        <button class="btn-cancel" onclick="closeCert()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
