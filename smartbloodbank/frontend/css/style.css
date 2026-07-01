@@ -895,76 +895,38 @@ h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
 }
 
 @media (max-width: 768px) {
-  .auth-container {
-    display: flex !important;
-    flex-direction: column !important;
-    min-height: 100vh;
+  #adminSidebar,
+  #userSidebar {
+    position: fixed !important;
+    top: 0;
+    left: -260px !important;
+    width: 240px;
+    height: 100vh;
+    z-index: 1100;
+    transition: left 0.3s ease;
+    overflow-y: auto;
   }
 
-  .auth-left,
-  .auth-right {
+  #adminSidebar.open,
+  #userSidebar.open {
+    left: 0 !important;
+  }
+
+  .sidebar-overlay {
+    display: none;
+  }
+
+  .sidebar-overlay.show {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1099;
+  }
+
+  .main-area {
     width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .auth-left {
-    padding: 24px 20px !important;
-    min-height: auto !important;
-    text-align: center;
-  }
-
-  .auth-brand h1 {
-    font-size: 2.2rem !important;
-    line-height: 1.1 !important;
-  }
-
-  .auth-brand p {
-    font-size: 0.95rem !important;
-  }
-
-  .auth-stats {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 12px !important;
-    flex-wrap: wrap !important;
-    margin-top: 20px !important;
-  }
-
-  .astat {
-    min-width: 110px;
-  }
-
-  .auth-right {
-    padding: 20px !important;
-  }
-
-  .auth-form,
-  .form-grid2 {
-    width: 100% !important;
-  }
-
-  .form-grid2 {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-  }
-
-  .auth-tabs {
-    width: 100% !important;
-  }
-
-  .auth-tabs .atab {
-    flex: 1;
-  }
-
-  .field input,
-  .field select,
-  .btn-primary,
-  .btn-secondary {
-    width: 100% !important;
-  }
-
-  body {
-    overflow-x: hidden;
+    margin-left: 0 !important;
   }
 }
 /* SCROLLBAR */

@@ -498,23 +498,24 @@ async function loadUserProfile() {
     currentUser = {...currentUser, ...await res.json()};
   } catch{}
 }
+function adminSection(name) {
+  document.querySelectorAll(".asec").forEach(s => s.classList.remove("active"));
+  document.getElementById("sec-" + name).classList.add("active");
+  document.querySelectorAll(".slink").forEach(b =>
+    b.classList.toggle("active", b.getAttribute("onclick") && b.getAttribute("onclick").includes(name))
+  );
+  document.getElementById("adminPageTitle").textContent = name.charAt(0).toUpperCase() + name.slice(1);
 
-function userSection(name) {
-  document.querySelectorAll(".usec").forEach(s=>s.classList.remove("active"));
-  document.getElementById("usec-"+name).classList.add("active");
-  document.querySelectorAll("#userSidebar .slink").forEach(b=>b.classList.toggle("active", b.getAttribute("onclick")&&b.getAttribute("onclick").includes(`'${name}'`)));
-  document.getElementById("userPageTitle").textContent = name.charAt(0).toUpperCase()+name.slice(1);
-  if(name==="home") loadUserHome();
-  else if(name==="donate") loadDonateSection();
-  else if(name==="search") {}
-  else if(name==="myrequests") loadMyRequests();
-  else if(name==="history") loadMyHistory();
-  else if(name==="profile") loadProfileSection();
-  else if(name==="compatibility") loadCompatibility();
-  else if(name==="events") loadUserEvents();
-  else if(name==="faq") loadFAQ();
+  if (name === "dashboard") loadAdminDashboard();
+  else if (name === "users") loadAdminUsers();
+  else if (name === "donations") loadAdminDonations();
+  else if (name === "requests") loadAdminRequests();
+  else if (name === "stock") loadAdminStock();
+  else if (name === "events") loadAdminEvents();
+  else if (name === "analytics") loadAnalytics();
+
+  closeSidebar();
 }
-
 async function loadUserHome() {
   await loadUserProfile();
   const u = currentUser;
