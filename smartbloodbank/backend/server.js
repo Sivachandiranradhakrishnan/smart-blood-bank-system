@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-console.log("MONGO_URI =", process.env.MONGO_URI);
+
 const authRoutes = require("./routes/authRoutes");
 const donorRoutes = require("./routes/donorRoutes");
 const requestRoutes = require("./routes/requestRoutes");
@@ -11,7 +11,9 @@ const notificationRoutes = require("./routes/notificationRoutes");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://your-frontend.vercel.app"
+}));
 app.use(express.json());
 
 // MongoDB Connection

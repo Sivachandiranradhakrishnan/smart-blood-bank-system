@@ -1,7 +1,8 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://smart-blood-bank-system-i7wo.onrender.com/api";
+
 let currentUser = null;
 let allUsers = [];
-let cgeneratedOTP = "";
+let generatedOTP = "";
 
 // ===================== UTILS =====================
 function token() { return localStorage.getItem("token"); }
