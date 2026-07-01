@@ -890,22 +890,30 @@ h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
 .match-req-item p { font-size: 0.78rem; color: var(--text2); margin-top: 4px; }
 
 /* RESPONSIVE */
-@media (max-width: 900px) {
-  .auth-container { grid-template-columns: 1fr; }
-  .auth-left { display: none; }
-  .stat-grid { grid-template-columns: repeat(2, 1fr); }
-  .dash-row { grid-template-columns: 1fr; }
-  .sidebar { transform: translateX(-100%); }
-  .sidebar.open { transform: none; }
-  .main-area { margin-left: 0; }
-  .menu-btn { display: block; }
-  .analytics-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 600px) {
-  .stat-grid { grid-template-columns: 1fr 1fr; }
-  .form-grid2 { grid-template-columns: 1fr; }
-  .asec, .usec { padding: 16px; }
-  .auth-right { padding: 30px 20px; }
+@media (max-width: 768px) {
+  #adminSidebar,
+  #userSidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 260px;
+    height: 100vh;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+  }
+
+  #adminSidebar.open,
+  #userSidebar.open {
+    left: 0;
+  }
+
+  .main-content,
+  .admin-main,
+  .user-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
 }
 
 /* SCROLLBAR */

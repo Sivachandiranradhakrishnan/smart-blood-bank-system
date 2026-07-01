@@ -50,8 +50,25 @@ function toggleTheme() {
 
 // ===================== SIDEBAR =====================
 function toggleSidebar() {
-  const s = document.querySelector(".sidebar.open") || document.querySelector("#adminSidebar") || document.querySelector("#userSidebar");
-  if(s) s.classList.toggle("open");
+  const adminSidebar = document.getElementById("adminSidebar");
+  const userSidebar = document.getElementById("userSidebar");
+  const overlay = document.getElementById("sidebarOverlay");
+
+  if (adminSidebar && document.getElementById("adminPage")?.classList.contains("active")) {
+    adminSidebar.classList.toggle("open");
+    overlay?.classList.toggle("show");
+  }
+
+  if (userSidebar && document.getElementById("userPage")?.classList.contains("active")) {
+    userSidebar.classList.toggle("open");
+    overlay?.classList.toggle("show");
+  }
+}
+
+function closeSidebar() {
+  document.getElementById("adminSidebar")?.classList.remove("open");
+  document.getElementById("userSidebar")?.classList.remove("open");
+  document.getElementById("sidebarOverlay")?.classList.remove("show");
 }
 
 // ===================== AUTH PAGE INIT =====================
