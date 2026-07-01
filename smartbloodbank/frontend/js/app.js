@@ -2,7 +2,6 @@ const API_URL = "https://smart-blood-bank-system-i7wo.onrender.com/api";
 
 let currentUser = null;
 let allUsers = [];
-let generatedOTP = "";
 
 // ===================== UTILS =====================
 function token() { return localStorage.getItem("token"); }
@@ -115,25 +114,7 @@ function checkAge() {
 }
 
 // ===================== REGISTER =====================
-async function sendOTP() {
-  const username = document.getElementById("regUser").value.trim();
-  const phone = document.getElementById("regPhone").value.trim();
-  const fullName = document.getElementById("regName").value.trim();
-
-  if (!username || !phone || !fullName) {
-    return setMsg("registerMsg", "Fill name, username, and phone first.", "error");
-  }
-
-  generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-  showEl("otpSection");
-  setMsg("registerMsg", `Demo OTP sent to ${phone}: ${generatedOTP}`, "success");
-}
-
 async function register() {
-  const enteredOTP = document.getElementById("otpInput").value.trim();
-
-  if (!enteredOTP) return setMsg("registerMsg", "Enter the OTP first.", "error");
-  if (enteredOTP !== generatedOTP) return setMsg("registerMsg", "Incorrect OTP. Try again.", "error");
 
   const username = document.getElementById("regUser").value.trim();
   const password = document.getElementById("regPass").value;
