@@ -70,6 +70,13 @@ function closeSidebar() {
   document.getElementById("userSidebar")?.classList.remove("open");
   document.getElementById("sidebarOverlay")?.classList.remove("show");
 }
+function resetMobileSidebar() {
+  if (window.innerWidth <= 768) {
+    document.getElementById("adminSidebar")?.classList.remove("open");
+    document.getElementById("userSidebar")?.classList.remove("open");
+    document.getElementById("sidebarOverlay")?.classList.remove("show");
+  }
+}
 // ===================== AUTH PAGE INIT =====================
 async function initLoginPage() {
   try {
@@ -935,6 +942,7 @@ setInterval(() => {
 
 // ===================== INIT =====================
 window.onload = async () => {
+  resetMobileSidebar();
   initLoginPage();
 
   if (!token()) return;
