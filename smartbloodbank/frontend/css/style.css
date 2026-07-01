@@ -899,89 +899,124 @@ h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
     overflow-x: hidden !important;
   }
 
-  .auth-container {
-    display: flex !important;
-    flex-direction: column !important;
+  .app-layout {
+    display: block !important;
     width: 100% !important;
-    min-height: 100vh !important;
+    overflow-x: hidden !important;
   }
 
-  .auth-left,
-  .auth-right {
-    width: 100% !important;
-    max-width: 100% !important;
-    flex: none !important;
+  #adminSidebar,
+  #userSidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: -260px !important;
+    width: 240px !important;
+    height: 100vh !important;
+    z-index: 1100 !important;
+    transition: left 0.3s ease !important;
+    overflow-y: auto !important;
   }
 
-  .auth-left {
-    min-height: auto !important;
-    padding: 24px 18px !important;
+  #adminSidebar.open,
+  #userSidebar.open {
+    left: 0 !important;
+  }
+
+  .sidebar-overlay {
+    display: none;
+  }
+
+  .sidebar-overlay.show {
+    display: block !important;
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.45) !important;
+    z-index: 1099 !important;
+  }
+
+  .main-area {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding: 14px !important;
+    overflow-x: hidden !important;
+  }
+
+  .topbar {
     display: flex !important;
-    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    padding: 12px 14px !important;
+  }
+
+  .menu-btn {
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    text-align: center !important;
+    z-index: 1101 !important;
+    position: relative !important;
   }
 
-  .auth-brand h1 {
-    font-size: 2rem !important;
-    line-height: 1.1 !important;
+  .topbar-title {
+    font-size: 1rem !important;
+  }
+
+  .topbar-user {
+    font-size: 0.8rem !important;
+  }
+
+  .user-hero,
+  .dash-card,
+  .stat-card,
+  .form-card,
+  .event-card,
+  .request-card,
+  .profile-card,
+  .compat-result {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .user-hero h2,
+  #heroTitle {
+    font-size: 1.4rem !important;
+    line-height: 1.2 !important;
     word-break: break-word;
   }
 
-  .auth-brand p {
-    font-size: 0.95rem !important;
+  .user-hero p,
+  #heroSub {
+    font-size: 0.9rem !important;
   }
 
-  .auth-stats {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 12px !important;
-    margin-top: 20px !important;
-  }
-
-  .astat {
-    flex: 1 1 120px;
-    min-width: 110px;
-  }
-
-  .auth-right {
-    padding: 20px 16px 30px !important;
-  }
-
-  .auth-tabs {
-    width: 100% !important;
-    display: flex !important;
-  }
-
-  .auth-tabs .atab {
-    flex: 1 !important;
-  }
-
-  .auth-form {
-    width: 100% !important;
-  }
-
-  .form-grid2 {
+  .stat-grid,
+  .dash-row,
+  .analytics-grid,
+  .form-grid2,
+  .search-bar-row,
+  .stock-grid,
+  .donor-grid,
+  .badges-grid,
+  .compat-info-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 12px !important;
   }
 
-  .field,
+  .search-bar-row input,
+  .search-bar-row select,
+  .search-bar-row button,
   .field input,
   .field select,
   .field textarea,
   .btn-primary,
-  .btn-secondary,
-  .auth-actions {
+  .btn-secondary {
     width: 100% !important;
     max-width: 100% !important;
   }
 
-  .auth-left *,
-  .auth-right * {
+  .main-area * {
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
