@@ -895,88 +895,192 @@ h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
 }
 
 @media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  /* LOGIN / REGISTER PAGE */
+  #loginPage .auth-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  #loginPage .auth-left,
+  #loginPage .auth-right {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #loginPage .auth-left {
+    padding: 20px 16px;
+    text-align: center;
+  }
+
   #loginPage .auth-brand h1 {
-    font-size: 1.2rem !important;
-    line-height: 1.1 !important;
-    letter-spacing: 0.5px !important;
-    word-break: break-word !important;
+    font-size: 1.6rem;
+    line-height: 1.1;
+    word-break: break-word;
   }
 
   #loginPage .auth-brand p {
-    font-size: 0.8rem !important;
+    font-size: 0.85rem;
   }
 
-  #loginPage .astat span {
-    font-size: 1.4rem !important;
+  #loginPage .auth-stats {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
   }
 
-  #loginPage .astat small {
-    font-size: 0.75rem !important;
+  #loginPage .auth-right {
+    padding: 20px 16px 30px;
   }
-}
-@media (max-width: 768px) {
-  #userPage .user-hero,
-  #adminPage .user-hero {
-    padding: 10px 0 18px !important;
+
+  #loginPage .auth-tabs {
+    display: flex;
+    width: 100%;
+  }
+
+  #loginPage .auth-tabs .atab {
+    flex: 1;
+  }
+
+  #loginPage .form-grid2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  #loginPage input,
+  #loginPage select,
+  #loginPage .btn-primary,
+  #loginPage .btn-secondary {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* USER + ADMIN PAGES */
+  #userPage .app-layout,
+  #adminPage .app-layout {
+    display: block;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  #userPage .sidebar,
+  #adminPage .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 240px;
+    height: 100vh;
+    z-index: 1100;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+  }
+
+  #userPage .sidebar.open,
+  #adminPage .sidebar.open {
+    left: 0;
+  }
+
+  #userPage .main-area,
+  #adminPage .main-area {
+    width: 100%;
+    margin-left: 0;
+    padding: 14px;
+    overflow-x: hidden;
+  }
+
+  #userPage .topbar,
+  #adminPage .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 12px 14px;
+  }
+
+  #userPage .menu-btn,
+  #adminPage .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1101;
+    position: relative;
   }
 
   #userPage #heroTitle,
   #adminPage #heroTitle,
   #userPage .user-hero h2 {
-    font-size: 1.8rem !important;
-    line-height: 1.05 !important;
-    word-break: break-word !important;
-    margin-bottom: 12px !important;
+    font-size: 1.8rem;
+    line-height: 1.15;
+    word-break: break-word;
   }
 
   #userPage #heroSub,
   #userPage .user-hero p {
-    font-size: 0.95rem !important;
-    line-height: 1.5 !important;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  #userPage .stat-grid,
+  #userPage .dash-row,
+  #userPage .analytics-grid,
+  #userPage .form-grid2,
+  #userPage .search-bar-row,
+  #userPage .stock-grid,
+  #userPage .donor-grid,
+  #userPage .badges-grid,
+  #userPage .compat-info-grid,
+  #adminPage .stat-grid,
+  #adminPage .dash-row,
+  #adminPage .analytics-grid,
+  #adminPage .form-grid2,
+  #adminPage .stock-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   #userPage .stat-card,
-  #adminPage .stat-card {
-    padding: 22px 18px !important;
-    border-radius: 22px !important;
+  #userPage .dash-card,
+  #userPage .form-card,
+  #userPage .event-card,
+  #userPage .request-card,
+  #userPage .donor-card,
+  #userPage .profile-card,
+  #userPage .compat-result,
+  #adminPage .stat-card,
+  #adminPage .dash-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
-  #userPage .snum,
-  #adminPage .snum {
-    font-size: 1.8rem !important;
-    line-height: 1 !important;
+  #userPage input,
+  #userPage select,
+  #userPage textarea,
+  #userPage button,
+  #adminPage input,
+  #adminPage select,
+  #adminPage textarea,
+  #adminPage button {
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
-  #userPage .slabel,
-  #adminPage .slabel {
-    font-size: 0.95rem !important;
-    letter-spacing: 1px !important;
-  }
-
-  #userPage .dash-card h3,
-  #adminPage .dash-card h3 {
-    font-size: 1rem !important;
-  }
-
-  #userPage .topbar-title,
-  #adminPage .topbar-title {
-    font-size: 1.3rem !important;
-  }
-
-  #userPage .topbar-user,
-  #adminPage .topbar-user {
-    font-size: 0.9rem !important;
-  }
-}
-@media (max-width: 768px) {
-  #userPage .sidebar,
-  #adminPage .sidebar {
-    left: -260px !important;
-  }
-
-  #userPage .sidebar.open,
-  #adminPage .sidebar.open {
-    left: 0 !important;
+  .sidebar-overlay.show {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1099;
   }
 }
 /* SCROLLBAR */
