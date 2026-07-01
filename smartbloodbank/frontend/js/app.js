@@ -71,6 +71,12 @@ function closeSidebar() {
   document.getElementById("sidebarOverlay")?.classList.remove("show");
 }
 
+function closeSidebar() {
+  document.getElementById("adminSidebar")?.classList.remove("open");
+  document.getElementById("userSidebar")?.classList.remove("open");
+  document.getElementById("sidebarOverlay")?.classList.remove("show");
+}
+
 // ===================== AUTH PAGE INIT =====================
 async function initLoginPage() {
   try {

@@ -890,7 +890,19 @@ h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
 .match-req-item p { font-size: 0.78rem; color: var(--text2); margin-top: 4px; }
 
 /* RESPONSIVE */
+.sidebar-overlay {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .menu-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    z-index: 1101;
+    position: relative;
+  }
+
   #adminSidebar,
   #userSidebar {
     position: fixed;
@@ -898,7 +910,7 @@ h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
     left: -280px;
     width: 260px;
     height: 100vh;
-    z-index: 1000;
+    z-index: 1100;
     transition: left 0.3s ease;
     overflow-y: auto;
   }
@@ -908,14 +920,19 @@ h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
     left: 0;
   }
 
-  .main-content,
-  .admin-main,
-  .user-main {
+  .sidebar-overlay.show {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1099;
+  }
+
+  .main-area {
+    width: 100%;
     margin-left: 0 !important;
-    width: 100% !important;
   }
 }
-
 /* SCROLLBAR */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
