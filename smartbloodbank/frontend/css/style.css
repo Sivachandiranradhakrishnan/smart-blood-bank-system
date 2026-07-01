@@ -975,6 +975,60 @@ h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
     gap: 12px !important;
   }
 }
+@media (max-width: 768px) {
+  #userPage .user-hero,
+  #adminPage .user-hero {
+    padding: 10px 0 18px !important;
+  }
+
+  #userPage #heroTitle,
+  #adminPage #heroTitle,
+  #userPage .user-hero h2 {
+    font-size: 1.8rem !important;
+    line-height: 1.05 !important;
+    word-break: break-word !important;
+    margin-bottom: 12px !important;
+  }
+
+  #userPage #heroSub,
+  #userPage .user-hero p {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+  }
+
+  #userPage .stat-card,
+  #adminPage .stat-card {
+    padding: 22px 18px !important;
+    border-radius: 22px !important;
+  }
+
+  #userPage .snum,
+  #adminPage .snum {
+    font-size: 1.8rem !important;
+    line-height: 1 !important;
+  }
+
+  #userPage .slabel,
+  #adminPage .slabel {
+    font-size: 0.95rem !important;
+    letter-spacing: 1px !important;
+  }
+
+  #userPage .dash-card h3,
+  #adminPage .dash-card h3 {
+    font-size: 1rem !important;
+  }
+
+  #userPage .topbar-title,
+  #adminPage .topbar-title {
+    font-size: 1.3rem !important;
+  }
+
+  #userPage .topbar-user,
+  #adminPage .topbar-user {
+    font-size: 0.9rem !important;
+  }
+}
 /* SCROLLBAR */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
