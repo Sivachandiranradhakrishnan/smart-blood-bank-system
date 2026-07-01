@@ -895,76 +895,109 @@ h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
 }
 
 @media (max-width: 768px) {
-  #loginPage .auth-container {
+  #userPage .app-layout,
+  #adminPage .app-layout {
     display: block !important;
     width: 100% !important;
-    min-height: 100vh !important;
+    overflow-x: hidden !important;
   }
 
-  #loginPage .auth-left,
-  #loginPage .auth-right {
+  #userPage .main-area,
+  #adminPage .main-area {
     width: 100% !important;
-    max-width: 100% !important;
-    display: block !important;
+    margin-left: 0 !important;
+    padding: 14px !important;
+    overflow-x: hidden !important;
   }
 
-  #loginPage .auth-left {
-    padding: 20px 16px !important;
-    text-align: center !important;
-    min-height: auto !important;
+  #userPage .sidebar,
+  #adminPage .sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: -260px !important;
+    width: 240px !important;
+    height: 100vh !important;
+    z-index: 1100 !important;
+    overflow-y: auto !important;
+    transition: left 0.3s ease !important;
   }
 
-  #loginPage .auth-brand h1 {
-    font-size: 2rem !important;
-    line-height: 1.1 !important;
-    word-break: break-word !important;
+  #userPage .sidebar.open,
+  #adminPage .sidebar.open {
+    left: 0 !important;
   }
 
-  #loginPage .auth-brand p {
-    font-size: 0.9rem !important;
-  }
-
-  #loginPage .auth-stats {
+  #userPage .topbar,
+  #adminPage .topbar {
     display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
+    align-items: center !important;
+    justify-content: space-between !important;
     gap: 10px !important;
-    margin-top: 16px !important;
+    padding: 12px 14px !important;
   }
 
-  #loginPage .auth-right {
-    padding: 20px 16px 30px !important;
+  #userPage .menu-btn,
+  #adminPage .menu-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    z-index: 1101 !important;
   }
 
-  #loginPage .auth-tabs {
-    display: flex !important;
-    width: 100% !important;
-  }
-
-  #loginPage .auth-tabs .atab {
-    flex: 1 !important;
-  }
-
-  #loginPage .auth-form {
-    width: 100% !important;
-  }
-
-  #loginPage .form-grid2 {
+  #userPage .stat-grid,
+  #userPage .dash-row,
+  #userPage .analytics-grid,
+  #userPage .form-grid2,
+  #userPage .search-bar-row,
+  #userPage .stock-grid,
+  #userPage .donor-grid,
+  #userPage .badges-grid,
+  #userPage .compat-info-grid,
+  #adminPage .stat-grid,
+  #adminPage .dash-row,
+  #adminPage .analytics-grid,
+  #adminPage .form-grid2,
+  #adminPage .stock-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 12px !important;
   }
 
-  #loginPage input,
-  #loginPage select,
-  #loginPage .btn-primary,
-  #loginPage .btn-secondary {
+  #userPage .user-hero h2,
+  #heroTitle {
+    font-size: 1.4rem !important;
+    line-height: 1.2 !important;
+  }
+
+  #userPage .user-hero p,
+  #heroSub {
+    font-size: 0.9rem !important;
+  }
+
+  #userPage .stat-card,
+  #userPage .dash-card,
+  #userPage .form-card,
+  #userPage .event-card,
+  #userPage .request-card,
+  #userPage .donor-card,
+  #userPage .profile-card,
+  #userPage .compat-result,
+  #adminPage .stat-card,
+  #adminPage .dash-card {
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
 
-  #loginPage * {
+  #userPage input,
+  #userPage select,
+  #userPage textarea,
+  #userPage button,
+  #adminPage input,
+  #adminPage select,
+  #adminPage textarea,
+  #adminPage button {
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
