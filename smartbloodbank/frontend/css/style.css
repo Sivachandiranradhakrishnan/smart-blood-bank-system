@@ -924,58 +924,6 @@ h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
   }
 }
 @media (max-width: 768px) {
-  #userPage .app-layout,
-  #adminPage .app-layout {
-    display: block !important;
-    width: 100% !important;
-    overflow-x: hidden !important;
-  }
-
-  #userPage .sidebar,
-  #adminPage .sidebar {
-    position: fixed !important;
-    top: 0 !important;
-    left: -260px !important;
-    width: 240px !important;
-    height: 100vh !important;
-    z-index: 1100 !important;
-    overflow-y: auto !important;
-    transition: left 0.3s ease !important;
-  }
-
-  #userPage .sidebar.open,
-  #adminPage .sidebar.open {
-    left: 0 !important;
-  }
-
-  #userPage .main-area,
-  #adminPage .main-area {
-    width: 100% !important;
-    margin-left: 0 !important;
-    padding: 14px !important;
-    overflow-x: hidden !important;
-  }
-
-  #userPage .stat-grid,
-  #userPage .dash-row,
-  #userPage .analytics-grid,
-  #userPage .form-grid2,
-  #userPage .search-bar-row,
-  #userPage .stock-grid,
-  #userPage .donor-grid,
-  #userPage .badges-grid,
-  #userPage .compat-info-grid,
-  #adminPage .stat-grid,
-  #adminPage .dash-row,
-  #adminPage .analytics-grid,
-  #adminPage .form-grid2,
-  #adminPage .stock-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-  }
-}
-@media (max-width: 768px) {
   #userPage .user-hero,
   #adminPage .user-hero {
     padding: 10px 0 18px !important;
