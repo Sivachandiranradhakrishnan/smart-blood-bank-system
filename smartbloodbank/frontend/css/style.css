@@ -913,70 +913,66 @@ h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
     min-height: auto !important;
     padding: 20px 16px !important;
     text-align: center !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-
-  #loginPage .auth-brand h1 {
-    font-size: 1.6rem !important;
-    line-height: 1.05 !important;
-    margin-bottom: 10px !important;
-  }
-
-  #loginPage .auth-brand p {
-    font-size: 0.9rem !important;
-  }
-
-  #loginPage .auth-stats {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 12px !important;
-    margin-top: 16px !important;
-  }
-
-  #loginPage .astat {
-    min-width: 110px !important;
   }
 
   #loginPage .auth-right {
     padding: 20px 16px 30px !important;
   }
 
-  #loginPage .auth-tabs {
-    display: flex !important;
-    width: 100% !important;
-  }
-
-  #loginPage .auth-tabs .atab {
-    flex: 1 !important;
-  }
-
-  #loginPage .auth-form {
-    width: 100% !important;
-  }
-
   #loginPage .form-grid2 {
+    grid-template-columns: 1fr !important;
+  }
+}
+@media (max-width: 768px) {
+  #userPage .app-layout,
+  #adminPage .app-layout {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  #userPage .sidebar,
+  #adminPage .sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: -260px !important;
+    width: 240px !important;
+    height: 100vh !important;
+    z-index: 1100 !important;
+    overflow-y: auto !important;
+    transition: left 0.3s ease !important;
+  }
+
+  #userPage .sidebar.open,
+  #adminPage .sidebar.open {
+    left: 0 !important;
+  }
+
+  #userPage .main-area,
+  #adminPage .main-area {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding: 14px !important;
+    overflow-x: hidden !important;
+  }
+
+  #userPage .stat-grid,
+  #userPage .dash-row,
+  #userPage .analytics-grid,
+  #userPage .form-grid2,
+  #userPage .search-bar-row,
+  #userPage .stock-grid,
+  #userPage .donor-grid,
+  #userPage .badges-grid,
+  #userPage .compat-info-grid,
+  #adminPage .stat-grid,
+  #adminPage .dash-row,
+  #adminPage .analytics-grid,
+  #adminPage .form-grid2,
+  #adminPage .stock-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 12px !important;
-  }
-
-  #loginPage .field,
-  #loginPage input,
-  #loginPage select,
-  #loginPage .btn-primary,
-  #loginPage .btn-secondary,
-  #loginPage .auth-actions {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  #loginPage * {
-    box-sizing: border-box !important;
-    max-width: 100% !important;
   }
 }
 /* SCROLLBAR */
